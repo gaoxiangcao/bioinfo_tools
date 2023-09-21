@@ -1,0 +1,38 @@
+#! /home/caogaoxiang/anaconda3/bin/python
+import sys
+import os
+import gzip
+
+import gtftools
+from gtftools import Gff3
+
+
+def main(args):
+    # print(args)
+    if len(args) != 3:
+        print(f"""\
+********************
+Function:convert gff3 to gtf
+Python path:{sys.executable}
+CLI path:{os.path.abspath(args[0])}
+CLI name:{os.path.basename(args[0])}
+--------------------
+    Version:{gtftools.__version__}
+    Author:{gtftools.__author__}
+    E-mail:{gtftools.__email__}
+--------------------
+Usage:
+gff2gtf.py <gff3|gff3.gz> <gtf|gtf.gz>
+********************
+        """
+        )
+    else:
+        gff = args[1]
+        gtf = args[2]
+        gff3 = Gff3(gff)
+        gff3.to_gtf(gtf)
+        print("Covert Done !")
+
+
+if __name__ == "__main__":
+    main(args=sys.argv)
