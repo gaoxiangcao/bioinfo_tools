@@ -216,5 +216,37 @@ gene_set <- read.gmt(gmtfile = "./gesa/CELL_MIGRATION.geneset.gmt")
 
 gseaplot2(res, geneSetID = 1:3)
 gseaplot2(res, geneSetID = 1:3)
+# ---------------------------------------------------------------------->>>>>>>
+# download org.Db
+# ---------------------------------------------------------------------->>>>>>>
+# install 
+# BiocManager::install("AnnotationHub")
+library(AnnotationHub)
+hub <- AnnotationHub::AnnotationHub()
+
+# query name 
+query(hub, "Synechocystis")
+query(hub, "Solanum")
+query(hub, "Escherichia coli")
+
+# download
+Ecoli.OrgDb <- hub[["AH111572"]]
+syn.OrgDb <- hub[["AH10608", force=T]]  # force download 
+syn.OrgDb <- loadDb("./orgdb/hom.Synechocystis_sp..inp8.sqlite")
+head(keys(syn.OrgDb))
+
+syn_6803.OrgDb <- hub[["AH12836"]]
+
+# download from https://annotationhub.bioconductor.org/
+# load local file
+library(AnnotationDbi)
+syn_6803.db <- AnnotationDbi::loadDb("./orgdb/org.Synechocystis_sp._PCC_6803.eg.sqlite")
+columns(syn_6803.db)
+syn_6803.db
+
+head(keys(syn_6803.db, keytype = "SYMBOL"))
+head(keys(syn_6803.db, keytype = "ENTREZID"))
+head(keys(syn_6803.db, keytype = "SYMBOL"))
+
 
 
