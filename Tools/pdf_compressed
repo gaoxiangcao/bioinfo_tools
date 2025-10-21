@@ -1,0 +1,8 @@
+brew install ghostscript
+
+gs -sDEVICE=pdfwrite \
+   -dCompatibilityLevel=1.6 \
+   -dNOPAUSE -dQUIET -dBATCH \
+   -dPDFSETTINGS=/prepress \
+   -sOutputFile=LSRF_Proposal_V3_compressed.pdf \
+   LSRF_Proposal_V3.pdf
